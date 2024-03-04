@@ -20,11 +20,8 @@ function App() {
     
     try
     {
-
       const response = await axios.get("https://localhost:44373/api/v1/movies");
-
       setMovies(response.data);
-
     } 
     catch(err)
     {
@@ -33,23 +30,18 @@ function App() {
   }
 
   const getMovieData = async (movieId) => {
-     
     try 
     {
         const response = await axios.get(`https://localhost:44373/api/v1/movies/${movieId}`);
-
         const singleMovie = response.data;
         setMovie(singleMovie);
-
         setReviews(singleMovie.reviewIds);
         console.log(singleMovie.reviewIds)
-
     } 
     catch (error) 
     {
       console.error(error);
     }
-
   }
 
   useEffect(() => {
