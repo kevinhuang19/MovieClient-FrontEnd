@@ -3,7 +3,7 @@ import './grid.css'
 import ImageContainer from "../ImageContainer/ImageContainer";
 import { useNavigate } from "react-router-dom";
 
-const Grid = ({ getMovieData }) => {
+const Grid = ({ movies }) => {
 
   const navigate = useNavigate();
 
@@ -13,10 +13,10 @@ const Grid = ({ getMovieData }) => {
       window.scrollTo(0, 0);
   }
 
-  console.log(getMovieData);
+  console.log(movies);
   return (
     <div className="movie-container">
-      {getMovieData?.map((movie) => {
+      {movies?.map((movie) => {
         return (
           <div className="movie-card" key={movie.imdbid} onClick={() => console.log(reviews(movie.imdbId))}> 
             <ImageContainer src={movie.poster} alt={movie.title} description={movie.title}/>

@@ -5,7 +5,7 @@ const Home = ({ movies }) => {
   return (
     <>
       <Hero movies={movies} />
-      <Grid getMovieData={movies} />
+      <Grid movies={movies} />
     </>
   );
 };

@@ -33,7 +33,7 @@ function App() {
         <Route path="/" element={<Layout/>}>
           <Route path="/" element={<Home movies={movies} />} />
           <Route path="/Trailer/:ytTrailerId" element={<Trailer />} />
-          <Route path="/Reviews/:movieId" element={<Reviews getMovieData={getMovies} />} />
+          <Route path="/Reviews/:movieId" element={<Reviews movies={movies} />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
