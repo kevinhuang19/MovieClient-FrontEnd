@@ -1,92 +1,81 @@
-import {useEffect, useRef} from 'react';
-import api from '../../api/axiosConfig';
-import {useParams} from 'react-router-dom';
-import {Container, Row, Col} from 'react-bootstrap';
-import ReviewForm from '../reviewForm/ReviewForm';
-import axios from 'axios';
+import React, { useEffect, useRef, useState } from "react";
+import { useParams } from "react-router-dom";
+import { Container, Row, Col } from "react-bootstrap";
+import ReviewForm from "../reviewForm/ReviewForm";
+import axios from "axios";
 
-import React from 'react'
+const Reviews = ({ getMovieData }) => {
+  const revText = useRef();
+  const [movie, setMovie] = useState(null);
+  const [reviews, setReviews] = useState([]);
+  const { movieId } = useParams();
 
-const Reviews = ({getMovieData,movie,reviews,setReviews}) => {
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`https://localhost:44373/api/v1/movies/${movieId}`);
+        const singleMovie = response.data;
+        setMovie(singleMovie);
+        setReviews(singleMovie.reviewIds);
+        console.log(singleMovie.reviewIds);
+      } catch (error) {
+        console.error(error);
+      }
+    };
 
-    const revText = useRef();
-    let params = useParams();
-    const movieId = params.movieId;
+    fetchData();
+  }, [movieId]);
 
-    useEffect(()=>{
-        getMovieData(movieId);
-    },[])
+  const addReview = async (e) => {
+    e.preventDefault();
+    const reviewBody = revText.current.value;
 
-    const addReview = async (e) =>{
-        e.preventDefault();
+    try {
+      await axios.post(
+        "https://localhost:44373/api/v1/reviews",
+        { reviewBody, imdbId: movieId }
+      );
 
-        const rev = revText.current;
-
-        try
-        {
-            const response = await axios.post("https://localhost:44373/api/v1/reviews",{reviewBody:rev.value,imdbId:movieId});
-
-            const updatedReviews = [...reviews, {body:rev.value}];
-    
-            rev.value = "";
-    
-            setReviews(updatedReviews);
-        }
-        catch(err)
-        {
-            console.error(err);
-        }
+      setReviews([...reviews, { body: reviewBody }]);
+      revText.current.value = "";
+    } catch (err) {
+      console.error(err);
     }
+  };
 
   return (
     <Container>
-        <Row>
-            <Col><h3>Reviews</h3></Col>
-        </Row>
-        <Row className="mt-2">
-            <Col>
-                <img src={movie?.poster} alt="" />
-            </Col>
-            <Col>
-                {
-                    <>
-                        <Row>
-                            <Col>
-                                <ReviewForm handleSubmit={addReview} revText={revText} labelText = "Write a Review?" />  
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col>
-                                <hr />
-                            </Col>
-                        </Row>
-                    </>
-                }
-                {
-                    reviews?.map((r) => {
-                        return(
-                            <div key ={r.id}>
-                                <Row>
-                                    <Col>{r.body}</Col>
-                                </Row>
-                                <Row>
-                                    <Col>
-                                        <hr />
-                                    </Col>
-                                </Row>                                
-                            </div>
-                        )
-                    })
-                }
-            </Col>
-        </Row>
-        <Row>
-            <Col>
-                <hr />
-            </Col>
-        </Row>        
+      <Row>
+        <Col>
+          <h3>Reviews</h3>
+        </Col>
+      </Row>
+      <Row className="mt-2">
+        <Col>
+          <img
+            style={{ width: "500px", height: "700px" }}
+            src={movie?.poster}
+            alt=""
+          />
+        </Col>
+        <Col>
+          <ReviewForm
+            handleSubmit={addReview}
+            revText={revText}
+            labelText="Write a Review?"
+          />
+          <hr />
+          {reviews.map((r, index) => (
+            <div key={index}>
+              <p>{r.body}</p>
+              <hr />
+            </div>
+          ))}
+        </Col>
+      </Row>
+      <hr />
     </Container>
-  )
-}
+  );
+};
 
-export default Reviews
+export default Reviews;

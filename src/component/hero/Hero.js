@@ -14,6 +14,7 @@ const Hero = ({movies}) => {
     function reviews(movieId)
     {
         navigate(`/Reviews/${movieId}`);
+        window.scrollTo(0, 0);
     }
 
   return (

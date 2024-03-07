@@ -1,0 +1,41 @@
+.image-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.image-container img {
+  margin-top: 8px;
+  vertical-align: middle;
+  width: 100%;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.image-container {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.image-container:hover img {
+  transform: scale(1.05);
+  filter: brightness(0.7);
+}
+
+.overlay-text {
+  position: absolute;
+  left: 20%;
+  top: 50%;
+  color: white;
+  font-weight: 900;
+  width: 150px;
+  height: 100px;
+  visibility: hidden;
+  text-align: center;
+  opacity: 0;
+  font-size: 16px;
+}
+
+.image-container:hover .overlay-text {
+  visibility: visible;
+  opacity: 1;
+}
