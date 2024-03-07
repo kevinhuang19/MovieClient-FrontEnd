@@ -1,9 +1,13 @@
-import Hero from '../hero/Hero';
+import Hero from "../hero/Hero";
+import Grid from "../grid/Grid";
 
-const Home = ({movies}) => {
+const Home = ({ movies }) => {
   return (
-    <Hero movies = {movies} />
-  )
-}
+    <>
+      <Hero movies={movies} />
+      <Grid getMovieData={movies} />
+    </>
+  );
+};
 
-export default Home
+export default Home;

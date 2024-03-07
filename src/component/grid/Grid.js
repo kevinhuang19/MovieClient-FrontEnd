@@ -3,7 +3,7 @@ import './grid.css'
 import ImageContainer from "../ImageContainer/ImageContainer";
 import { useNavigate } from "react-router-dom";
 
-export const Grid = ({ getMovieData }) => {
+const Grid = ({ getMovieData }) => {
 
   const navigate = useNavigate();
 
@@ -26,3 +26,5 @@ export const Grid = ({ getMovieData }) => {
     </div>
   );
 };
+
+export default Grid;
