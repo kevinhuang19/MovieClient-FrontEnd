@@ -1,5 +1,5 @@
 .movie-carousel-container{
-    width: 100vw;
+    width: calc(100vw - 18.5px);
     background-color: black;
 }
 
