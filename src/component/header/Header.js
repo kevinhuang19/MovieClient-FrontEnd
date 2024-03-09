@@ -1,18 +1,18 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faVideoSlash } from "@fortawesome/free-solid-svg-icons";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container"
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import {NavLink} from "react-router-dom";
+import MovieIcon from '@mui/icons-material/Movie';
 
 const Header = () => {
  
 return (
     <Navbar bg="dark" variant="dark" expand="lg">
         <Container fluid>
-            <Navbar.Brand href="/" style={{"color":'Silver'}}>
-                <FontAwesomeIcon icon ={faVideoSlash}/> Movies
+            <Navbar.Brand href="/" style={{"color":'Silver', display:'flex', justifyContent:'center', alignItems:'center'}}>
+                <MovieIcon /> Movies
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="navbarScroll" />
             <Navbar.Collapse id="navbarScroll">
