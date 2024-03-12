@@ -51,7 +51,8 @@ const Reviews = ({ movies }) => {
       <Container>
         <Row>
           <Col>
-            <h3>Reviews</h3>
+            <h3>{movie.title}</h3>
+            <h6>Release Date: {movie.releaseDate}</h6>
           </Col>
         </Row>
         <Row className="mt-2">
